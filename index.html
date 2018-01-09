@@ -1,22 +1,32 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-    <title>Hello, WebVR! - A-Frame</title>
-    <meta name="description" content="Hello, WebVR! - A-Frame" />
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-  </head>
-  <body class="a-body "><script type="text/javascript" src="http://192.168.2.1:35730/livereload.js?snipver=1"></script>
-    <a-scene class="fullscreen" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui=""><canvas class="a-canvas" data-aframe-canvas="true" width="300" height="150"></canvas>
-      <a-assets>
-        <a-asset-item id="bookstore" position="1000 1000 1000" rotation="180 180 0" src="/bookstore/bookstore-model.gltf"></a-asset-item>
-      </a-assets>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/feiss/aframe-environment-component/ad57b15d/dist/aframe-environment-component.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script> -->
 
-      <a-entity gltf-model="/bookstore/bookstore-model.gltf" position="-6 0 0" rotation="0 180 0"></a-entity>
+</head>
+<body>
+    <a-scene>
+      <a-entity
+                obj-model="obj: url(bookstore-model.obj); mtl: url(bookstore-model.mtl);"
+                scale="0.01 0.01 0.01"
+                position="0 1.5 -2"
+                rotation="0 90 0"
+       ></a-entity>
 
-    
-    
     </a-scene>
-    <!-- <a-entity position="-6.281 1.6 -2.734" camera="active:false;userHeight:1.6" wasd-controls="" rotation="0 180 0" look-controls="" aframe-injected="" data-aframe-inspector-original-camera="" data-aframe-inspector="default-camera"></a-entity> -->
-  
+</body>
+<script type="text/javascript">
+/*
+ * @author Daosheng Mu / https://github.com/DaoshengMu/
+ * @author mrdoob / http://mrdoob.com/
+ * @author takahirox / https://github.com/takahirox/
+ */
 
 
-
-</body></html>
+</script>
+</html>
