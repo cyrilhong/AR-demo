@@ -19,8 +19,5 @@
     "aframe-scene",
     "webvr",
     "vr"
-  ],
-  "dependencies": {
-    "ecstatic": "^3.1.1"
-  }
+  ]
 }
