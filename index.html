@@ -5,21 +5,16 @@
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <!-- <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script> -->
 
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <!-- <a-asset-item id="crate-obj" src="/bookstore/bookstore-model.obj"></a-asset-item> -->
-        <!-- <a-asset-item id="crate-mtl" src="/bookstore/bookstore-model.mtl"></a-asset-item> -->
       </a-assets>
       <!-- Using the asset management system. -->
-      <!-- <a-obj-model src="#crate-obj" mtl="#crate-mtl"></a-obj-model> -->
-      <!-- Defining the URL inline. Not recommended but may be more comfortable. -->
-      <!-- <a-gltf-model src="scene.gltf"></a-gltf-model> -->
-      <a-entity gltf-model="src: url(https://rawgit.com/cyrilhong/AR-demo/master/bookstore/bookstore-model.gltf);" scale="1 1 1" position="20 -1 20 "></a-entity>
-      <!-- <a-entity gltf-model="src: url(adidas.gltf);" scale="0.01 0.01 0.01"></a-entity> -->
+      <!-- <a-entity gltf-model="src: url(https://rawgit.com/cyrilhong/AR-demo/master/bookstore/bookstore-model.gltf);" scale="1 1 1" position="20 -1 20 "></a-entity> -->
+      <a-entity gltf-model="src: url(skull.gltf);" scale="0.01 0.01 0.01" position="-2.326 -0.6 -7 "></a-entity>
 
       <a-entity camera look-controls wasd-controls position="1 0 1"></a-entity>
     </a-scene>
