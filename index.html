@@ -5,6 +5,7 @@
   <title>Hello, World! - A-Frame</title>
   <meta name="description" content="Hello, World! - A-Frame">
   <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
 <!-- <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script> -->
   <script src="https://s3-us-west-1.amazonaws.com/geopogo/vrtour/tests/miamibch_01/js/my_aframe/sms_wasd-controls.js"></script>
   <!-- <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script> -->
@@ -15,9 +16,12 @@
 
 <body>
 
-  <a-scene>
+  <a-scene light="defaultLightsEnabled: false">
     <!--  START BY ESTABLISHING THE ASSET CONTAINER -->
   <a-assets>
+    <img id="floor-normalMap" src="NormalMap.png">
+    <img id="floor-displacementMap" src="DisplacementMap.png">
+    <img id="sphericEnvMap" src="texturify_pano-1-12.jpg">
   </a-assets>
 
     <!--  A SOLID BG -->
@@ -27,14 +31,31 @@
     <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder> -->
     <!-- <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
     <a-sky color="#ECECEC"></a-sky>
+    <a-entity id="table" gltf-model="table.gltf" position="-0.468 0 -7.41" shadow="" material="" rotation="0 90 0" scale="1.5 1.5 1.5"></a-entity>
+    <!-- <a-entity id="mbpr" gltf-model="scene.gltf" position="-0.468 0.943 -6.721" shadow="" material="" scale="0.5 0.5 0.5"></a-entity> -->
+    <a-collada-model src="mbpr.dae" rotation="16 0 0" position="-0.648 1.6 -6.501" scale="0.5 0.5 0.5" collada-model="mbpr.dae" shadow="receive:false" animation="property: rotation; dir: alternate; dur: 15000; to: 16 360 0; loop: true"></a-collada-model>
 
-    <a-entity gltf-model="src: url(bookstore-model.gltf);" scale="1 1 1" position="0 0 0"></a-entity>
     <!-- ADD A CAMERA AND CURSOR  -->
-	<a-entity id="visitor"  position="-5.0 0.6 -5.0" rotation="0.0 200.0 0.0">
-    	<a-entity camera id="scene_cam" look-controls sms_wasd-controls="acceleration: 50.0" position="0 1 0"  fov="40">
-        	<a-cursor color="red">
-      	</a-entity>
+  <a-entity id="visitor" position="-4.113 0.6 -7.896" rotation="0 200 0">
+    	<a-entity camera="active:false" id="scene_cam" look-controls="" sms_wasd-controls="acceleration:50" position="-5.11054786665933 1 3.582972016074496" fov="40" rotation="0 -18.90760723931717 0" data-aframe-inspector-original-camera="">
+        	<a-cursor color="red" raycaster="" cursor="">
+      	</a-cursor></a-entity>
     </a-entity>
+  <a-entity rotation="0 180 0" position="0 0 -13.26">
+    <a-box src="mitch-harris-513049.jpg" position="0 4.487 0.015" geometry="depth:0.2;height:9;width:18" shadow="" id="wall-1"></a-box>
+    <a-box src="mitch-harris-513049.jpg" position="8.932 4.487 -5.95" rotation="0 -90 0" geometry="width:12;depth:0.2;height:9" shadow="" id="wall-2"></a-box>
+    <a-box src="mitch-harris-513049.jpg" position="-8.932 4.487 -5.845" rotation="0 -90 0" geometry="width:12;depth:0.2;height:9" shadow="" id="wall-3"></a-box>
+    <a-plane src="minimalistic-wood_00324901.jpg" position="-0.053 -0.5 -5.916" rotation="-90 -90 0" geometry="height:18;width:12" shadow="" id="wall-4" material="roughness:0.7;normalMap:#floor-normalMap;displacementMap:#floor-displacementMap;sphericalEnvMap:#sphericEnvMap"></a-plane>
+    <a-entity position="-0.053 9.003 -5.958" rotation="90 -90 0" geometry="width:12;primitive:plane;height:18" material="" shadow="" id="wall-5"></a-entity>
+  </a-entity>
+  <!-- <a-entity light="intensity:0.6;castShadow:true" position="-0.5 2.532 -11.774" data-aframe-default-light="" aframe-injected=""></a-entity> -->
+  <a-entity light="type:point;intensity:0.36;castShadow:true" position="-0.43 8.155 -4.594" data-aframe-default-light="" aframe-injected=""></a-entity>
+  <!-- <a-entity light="intensity:0.41000000000000003;type:point;castShadow:true" position="-0.43 8.493 -7.992" data-aframe-default-light="" aframe-injected=""></a-entity> -->
+  <a-entity position="0 3.113 -12.989" light="intensity:1;type:ambient"></a-entity>
+  <a-sky color="#111"></a-sky>
+  <!-- <a-entity light="color:#BBB;type:ambient" data-aframe-default-light="" aframe-injected="" position="-3.936 2.626 -10.886"></a-entity> -->
+  <!-- <a-entity light="intensity:0.61;color:#BBB;type:ambient" data-aframe-default-light="" aframe-injected="" position="-11.184 4.536 2.608"></a-entity>
+  <a-entity light="intensity:1.05;castShadow:true" position="-11.988 4.273 0.862" data-aframe-default-light="" aframe-injected=""></a-entity> -->
 
 <!-- CLOSE THE SCENE OUT -->
 </a-scene>
