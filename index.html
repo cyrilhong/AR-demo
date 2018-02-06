@@ -25,14 +25,36 @@ AFRAME.registerComponent('handle-events', {
   init: function () {
     var el = this.el;  // <a-box>
     var cam = document.querySelector('a-camera');
-
     el.addEventListener('click', function () {
       // el.setAttribute('scale', {x: 2, y: 1, z: 2});
       console.log("hello");
       // cam.setAttribute('position', {x: 0, y: 3.6, z: 0});
     });
+
   }
 });
+
+AFRAME.registerComponent('position-reader', {
+  tick: function () {
+    var pos = this.el.getAttribute('position');
+    var posX = pos.x;
+    var posZ = pos.z;
+    var cam = document.querySelector('a-camera');
+    var info = document.querySelectorAll('.lettersEntity');
+    console.log(info);
+    // console.log("X: "+posX);
+    // console.log("Y: "+posZ);
+    if (posZ < -2&&posZ>-7&&posX<2&&posX>-2) {
+      // console.log("move!!!!!!!!!!!!!");
+      info[0].setAttribute('material', 'opacity', '1');
+      info[1].setAttribute('material', 'opacity', '1');
+    }else{
+      info[0].setAttribute('material', 'opacity', '0');
+      info[1].setAttribute('material', 'opacity', '0');
+    }
+  }
+});
+
 </script>
 <body>
   <a-scene light="defaultLightsEnabled: false">
@@ -41,6 +63,7 @@ AFRAME.registerComponent('handle-events', {
       <img id="floor-normalMap" src="NormalMap.png">
       <img id="floor-displacementMap" src="DisplacementMap.png">
       <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+      <video id="mac-video" autoplay loop="true" src="https://images.apple.com/media/us/macbook-pro/2016/b4a9efaa_6fe5_4075_a9d0_8e4592d6146c/films/design/macbook-pro-design-tft-cc-us-20161026_1536x640h.mp4"></video>
     </a-assets>
 
     <!--  A SOLID BG -->
@@ -52,16 +75,23 @@ AFRAME.registerComponent('handle-events', {
     <a-sky color="#ECECEC"></a-sky>
     <a-entity id="table" gltf-model="table.gltf" position="-0.468 0 -7.41" shadow="" material="" rotation="0 90 0" scale="1.5 1.5 1.5"></a-entity>
     <!-- <a-entity id="mbpr" gltf-model="scene.gltf" position="-0.468 0.943 -6.721" shadow="" material="" scale="0.5 0.5 0.5"></a-entity> -->
-    <a-collada-model src="mbpr.dae" rotation="16 0 0" position="-0.648 1.6 -6.501" scale="0.5 0.5 0.5" collada-model="mbpr.dae" shadow="receive:false" animation="property: rotation; normal: alternate; dur: 15000; to: 16 360 0; loop: true"></a-collada-model>
+    <a-collada-model id="mac" src="mbpr.dae" rotation="16 235.63187739563548 0" position="-1.213 1.6 -6.501" scale="0.5 0.5 0.5" collada-model="mbpr.dae" shadow="receive:false" animation="dur:15000;loop:true;property:rotation;to:16 360 0"></a-collada-model>
     <!-- link -->
     <!-- <a-box src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg" color="#fff" position="0.42 1.634 -7.072" handle-events="" geometry="primitive:plane" material="color:#d2dccb"></a-box> -->
-    <a-entity id="lettersEntity" geometry="primitive:plane;width:2;height:0.654" position="1.3 2.05 -6.5" handle-events="" material="shader:html;transparent:true;target:#target;fps:1.5;ratio:width"></a-entity>
+    <a-entity id="plane-text-group" position="-0.825 0 0">
+      <a-entity class="lettersEntity" geometry="primitive:plane;width:2;height:1.1199999999999999" position="1.3 2.05 -6.5" handle-events="" material="shader:html;transparent:true;target:#target;fps:1.5;ratio:width"></a-entity>
+      <a-entity class="lettersEntity" geometry="height:1.222222222222222;primitive:plane" position="0.8 1.8 -6.5" material="shader:html;transparent:true;target:#buythat;fps:1.5;ratio:width"></a-entity>
+    </a-entity>
+
+
+    <!-- video -->
+    <a-video src="#mac-video" width="16" height="9" position="-8.79 4.395 -7.243" geometry="height:4.5;width:8" rotation="0 90 0"></a-video>
+
     <!-- <a-entity id="lettersEntity" geometry="height:1.21;primitive:plane" position="0.632 3.009 -6.5" material="shader:html;transparent:true;target:#buy;fps:1.5;ratio:width"></a-entity> -->
     <!-- <a-entity id="emojiEntity" geometry="primitive:box;width:3;height:3" rotation="0 0 0" position="-2 2.5 -0.5" material="shader:html;target:#buythat;transparent:true;ratio:height;fps:0.3;side:double;"></a-entity> -->
-    <a-entity id="lettersEntity" geometry="height:1;primitive:plane;width:1" position="0.8 1.8 -6.5" material="shader:html;transparent:true;target:#buythat;fps:1.5;ratio:width"></a-entity>
 
     <!-- ADD A CAMERA AND CURSOR  -->
-    <a-camera id="camera" camera look-controls sms_wasd-controls="acceleration:50" position="-0.032 0 -0.512" rotation="0 0 0">
+    <a-camera id="camera" camera look-controls sms_wasd-controls="acceleration:50" position="-0.032 0 -0.512" rotation="0 0 0" position-reader>
       <a-entity cursor="fuse: true; fuseTimeout: 500"
         position="0 0 -1"
         geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
@@ -73,9 +103,10 @@ AFRAME.registerComponent('handle-events', {
     <a-box src="mitch-harris-513049.jpg" position="0 4.487 0.015" geometry="depth:0.2;height:9;width:18" shadow="" id="wall-1"></a-box>
     <a-box src="mitch-harris-513049.jpg" position="8.932 4.487 -5.95" rotation="0 -90 0" geometry="width:12;depth:0.2;height:9" shadow="" id="wall-2"></a-box>
     <a-box src="mitch-harris-513049.jpg" position="-8.932 4.487 -5.845" rotation="0 -90 0" geometry="width:12;depth:0.2;height:9" shadow="" id="wall-3"></a-box>
-    <a-plane src="minimalistic-wood_00324901.jpg" position="-0.053 -0.5 -5.916" rotation="-90 -90 0" geometry="height:18;width:12" shadow="" id="wall-4" material="roughness:0.7;normalMap:#floor-normalMap;displacementMap:#floor-displacementMap;sphericalEnvMap:#sphericEnvMap"></a-plane>
+
     <a-entity position="-0.053 9.003 -5.958" rotation="90 -90 0" geometry="width:12;primitive:plane;height:18" material="" shadow="" id="wall-5"></a-entity>
   </a-entity>
+  <a-plane src="minimalistic-wood_00324901.jpg" position="-0.053 -0.5 -5.916" rotation="-90 -90 0" geometry="height:18;width:12" shadow="" id="wall-4" material="roughness:0.7;normalMap:#floor-normalMap;displacementMap:#floor-displacementMap;sphericalEnvMap:#sphericEnvMap"></a-plane>
   <!-- <a-plane src="grass.jpg";repeat: 100 100; position="-0.053 0 -5.916" rotation="-90 0" geometry="height:100;width:100" shadow="" id="floor-1"></a-plane> -->
   <a-entity id="grass-floor" rotation="-90 0 0" geometry="primitive: plane; width:100;height:100" material="src: grass.jpg; repeat: 5 5"></a-entity>
   <!-- <a-entity light="intensity:0.6;castShadow:true" position="-0.5 2.532 -11.774" data-aframe-default-light="" aframe-injected=""></a-entity> -->
